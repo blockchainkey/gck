@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  node:
+    image: blockchainkey/gck:v2.0.2
+    command: /opt/eosio/bin/nodeos --data-dir=/data --genesis-json=/etc/nodeos/genesis.json --config-dir=/etc/nodeos --max-transaction-time=5000 --delete-all-blocks
+    restart: always
+    stop_grace_period: 10m
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - 8888:8888
+      - 9876:9876
+    expose:
+      - "8888"
+    volumes:
+      - $PWD/config:/etc/nodeos
+      - $PWD/data:/data

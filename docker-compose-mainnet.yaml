@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  node:
+    image: blockchainkey/gck:v2.0.2
+    command: /opt/eosio/bin/nodeos --data-dir=/data --config-dir=/etc/nodeos
+    restart: always
+    stop_grace_period: 10m
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - 8001:8888
+      - 9001:9876
+    expose:
+      - "8888"
+    volumes:
+      - $PWD/config:/etc/nodeos
+      - $PWD/data:/data
+
